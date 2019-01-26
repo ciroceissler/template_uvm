@@ -1,0 +1,16 @@
+# Design Testbench
+
+```
+$ mkdir build/
+$ cd build/
+$ irun -f ../scripts/run_design.f
+```
+
+# Verification Testbench
+
+```
+$ mkdir build/
+$ cd build/
+$ irun -f ../scripts/run_design.f
+```
+

@@ -1,0 +1,136 @@
+\documentclass[11pt]{article}
+\usepackage{adjustbox}
+\usepackage{epsfig}
+\usepackage{setspace}
+\usepackage[english]{babel}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{tabularx} % in the preamble
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage{paralist}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{verbatim}
+
+\usepackage[latin1]{inputenc} %
+\bibliographystyle{unsrt}
+
+\oddsidemargin 0pt  % was 38
+\evensidemargin 0pt % was 38
+\marginparwidth 0pt % was 68
+%
+\topmargin 50pt   % was 27
+\headheight 0pt   % was 12
+\headsep 0pt      % was 25
+%\footheight 0pt  % was 12
+\footskip 30pt    % was 30
+
+\textwidth 470pt     % was 390pt
+\textheight 600.5pt  % was 536.5
+
+\floatstyle{ruled}
+\newfloat{algoritmo}{thp}{loa}
+\floatname{algoritmo}{Algoritmo}
+
+% Commands to help in references
+\newcommand{\rsec}[1]{Section~\ref{sec:#1}}
+\newcommand{\rsecs}[2]{Sections~\ref{sec:#1} --~\ref{sec:#2}}
+\newcommand{\rtab}[1]{Table~\ref{tab:#1}}
+\newcommand{\rfig}[1]{Figure~\ref{fig:#1}}
+\newcommand{\rfigs}[2]{Figures~\ref{fig:#1} --~\ref{fig:#2}}
+\newcommand{\rfign}[3]{Figures~\ref{fig:#1}, \ref{fig:#2} \& \ref{fig:#3}}
+\newcommand{\rlst}[1]{Listing~\ref{lst:#1}}
+\newcommand{\rlsts}[2]{Listing~\ref{lst:#1}~--~\ref{lst:#2}}
+\newcommand{\rlstn}[3]{Listings~\ref{lst:#1}{#2}~--~\ref{lst:#1}{#3}}
+\newcommand{\req}[1]{Equation~\ref{eq:#1}}
+\newcommand{\reqs}[2]{Equations~\ref{eq:#1} --~\ref{eq:#2}}
+\newcommand{\ttt}[1]{{\texttt{#1}}}
+\newcommand{\tit}[1]{{\textit{#1}}}
+\newcommand{\citex}{{\bf [\noindent\textcolor{red}{?}]\ }}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+\hspace*{3mm}
+\begin{minipage}[tl]{12cm}
+  \begin{center}
+    {
+      {\Large Company}
+    }
+  \end{center}
+\end{minipage}
+\end{center}
+
+\vfill
+{\LARGE
+  \begin{center}
+    \textbf{Template Block Guide v1.0} \\
+    {\normalsize}
+  \end{center}
+}
+\vfill
+{\large
+
+\newpage
+
+\tableofcontents
+\newpage
+\listoffigures
+\newpage
+\listoftables
+
+\newpage
+
+\section{Preface}
+
+  \subsection{Purpose and Audience}
+
+  \subsection{Acronyms and Abbreviations}
+
+  \subsection{Glossary}
+
+  \subsection{References}
+
+\newpage
+
+\section{Introduction}
+
+\newpage
+
+\section{Block Specification}
+
+  \subsection{External Interfaces}
+
+  \subsection{Clock and Reset}
+
+  \subsection{Circuit Resources}
+
+  \subsection{Parameters}
+
+  \subsection{Modes of Operation}
+
+\newpage
+
+\section{Functional Description}
+
+\newpage
+
+\section{Memory Map}
+
+\newpage
+
+\end{document}
+
+% taf!
+
