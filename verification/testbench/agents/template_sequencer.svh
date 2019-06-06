@@ -1,6 +1,9 @@
+`ifndef TEMPLATE_SEQUENCER_SVH
+`define TEMPLATE_SEQUENCER_SVH
+
 class template_sequencer extends uvm_sequencer #(template_sqc_item);
 
-  `uvm_component_utils(template_sequencer);
+  `uvm_component_utils(template_sequencer)
 
   // +--------------------------------------------------------------------------
   // | FUNCTION: constructor
@@ -10,3 +13,6 @@ class template_sequencer extends uvm_sequencer #(template_sqc_item);
   endfunction : new
 
 endclass : template_sequencer
+
+`endif // TEMPLATE_SEQUENCER_SVH
+

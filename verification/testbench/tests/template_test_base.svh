@@ -1,8 +1,14 @@
+`ifndef TEMPLATE_TEST_BASE_SVH
+`define TEMPLATE_TEST_BASE_SVH
+
+`include "template_env_config.svh"
+`include "template_env.svh"
+
 class template_test_base extends template_test_report;
 
   localparam string config_id = "template_env_config";
 
-  template_sqc        sqc;
+  template_sqc_api    sqc;
   template_env        env;
   template_env_config env_config;
 
@@ -13,6 +19,9 @@ class template_test_base extends template_test_report;
   // +--------------------------------------------------------------------------
   function new(string name = "template_test_base", uvm_component parent = null);
     super.new(name, parent);
+
+    this.sqc = new();
+    this.env = new();
   endfunction : new
 
   // +--------------------------------------------------------------------------
@@ -20,24 +29,32 @@ class template_test_base extends template_test_report;
   // +--------------------------------------------------------------------------
   virtual function void configure_template_agent(template_agent_config agent_config);
     agent_config.active_mode = UVM_ACTIVE;
-    agent_config.has_mon     = 1;
+    agent_config.has_monitor = 1;
   endfunction : configure_template_agent
 
   // +--------------------------------------------------------------------------
   // | FUNCTION: configure_environment
   // +--------------------------------------------------------------------------
   virtual function void configure_environment();
------------------------------------------------------------------------
+    this.env_config = new();
+
+    uvm_config_db #(template_env_config)::set(null, "", "template_env_config", this.env_config);
+  endfunction : configure_environment
+
+  // +--------------------------------------------------------------------------
   // | TASK: run_phase
   // +--------------------------------------------------------------------------
   virtual task run_phase(uvm_phase phase);
   endtask : run_phase
 
   // +--------------------------------------------------------------------------
-  // | TASK: check_phase
+  // | FUNCTION: check_phase
   // +--------------------------------------------------------------------------
-  task check_phase(uvm_phase phase);
+  virtual function void check_phase(uvm_phase phase);
     $assertkill;
-  endtask : check_phase
+  endfunction : check_phase
 
 endclass : template_test_base
+
+`endif // TEMPLATE_TEST_BASE_SVH
+

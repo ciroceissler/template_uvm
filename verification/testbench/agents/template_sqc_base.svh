@@ -1,12 +1,15 @@
+`ifndef TEMPLATE_SQC_BASE_SVH
+`define TEMPLATE_SQC_BASE_SVH
+
 class template_sqc_base extends uvm_sequence #(template_sqc_item);
 
-  `uvm_component_utils(template_sqc_base);
+  `uvm_object_utils(template_sqc_base)
 
   // +--------------------------------------------------------------------------
   // | FUNCTION: constructor
   // +--------------------------------------------------------------------------
-  function new(string name = "template_sqc_base", uvm_component parent = null);
-    super.new(name, parent);
+  function new(string name = "template_sqc_base");
+    super.new(name);
   endfunction : new
 
   // +--------------------------------------------------------------------------
@@ -22,3 +25,6 @@ class template_sqc_base extends uvm_sequence #(template_sqc_item);
   endtask : post_start
 
 endclass : template_sqc_base
+
+`endif // TEMPLATE_SQC_BASE_SVH
+

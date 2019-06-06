@@ -1,8 +1,11 @@
+`ifndef TEMPLATE_MONITOR_SVH
+`define TEMPLATE_MONITOR_SVH
+
 class template_monitor extends uvm_monitor;
 
   template_agent_config agent_config;
 
-  `uvm_component_utils(template_monitor);
+  `uvm_component_utils(template_monitor)
 
   // +--------------------------------------------------------------------------
   // | FUNCTION: constructor
@@ -37,3 +40,6 @@ class template_monitor extends uvm_monitor;
   endtask : monitor
 
 endclass : template_monitor
+
+`endif // TEMPLATE_MONITOR_SVH
+

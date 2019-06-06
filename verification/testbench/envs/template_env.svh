@@ -1,3 +1,6 @@
+`ifndef TEMPLATE_ENV_SVH
+`define TEMPLATE_ENV_SVH
+
 class template_env extends uvm_env;
 
   template_agent template_ag;
@@ -16,7 +19,7 @@ class template_env extends uvm_env;
   // +--------------------------------------------------------------------------
   // | FUNCTION: build_phase
   // +--------------------------------------------------------------------------
-  virtual function build_phase(uvm_phase phase);
+  virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
 
     if (!uvm_config_db #(template_env_config)::get(this, "", "template_env_config", this.env_config)) begin
@@ -45,7 +48,7 @@ class template_env extends uvm_env;
   // +--------------------------------------------------------------------------
   // | FUNCTION: connect_phase
   // +--------------------------------------------------------------------------
-  virtual function connect_phase(uvm_phase phase);
+  virtual function void connect_phase(uvm_phase phase);
     if (this.env_config.has_chk) begin
       // TODO(ciroceissler): component connection
     end
@@ -56,3 +59,6 @@ class template_env extends uvm_env;
   endfunction : connect_phase
 
 endclass : template_env
+
+`endif // TEMPLATE_ENV_SVH
+

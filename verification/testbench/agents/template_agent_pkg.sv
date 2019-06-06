@@ -1,17 +1,17 @@
 package template_agent_pkg;
-
   import uvm_pkg::*;
 
   `include "uvm_macros.svh"
-  
-  `include "template_types.sv"
-  `include "template_sqc_item.sv"
-  `include "template_sqc_base.sv"
-  `include "template_sqc_api.sv"
-  `include "template_sequencer.sv"
-  `include "template_driver.sv"
-  `include "template_monitor.sv"
-  `include "template_agent_config.sv"
-  `include "template_agent.sv"
 
-endpackage : template_agent_pkg;
+  `include "template_types.svh"
+  `include "template_agent_config.svh"
+  `include "template_sqc_item.svh"
+  `include "template_sqc_base.svh"
+  `include "template_sqc_api.svh"
+  `include "template_sequencer.svh"
+  `include "template_driver.svh"
+  `include "template_monitor.svh"
+  `include "template_agent.svh"
+
+endpackage : template_agent_pkg
+

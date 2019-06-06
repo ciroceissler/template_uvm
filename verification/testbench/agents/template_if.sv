@@ -5,9 +5,6 @@ interface template_if #(OUTPUT_SKEW = 1ps) (
   input rst
 );
 
-  timeunit      1ns;
-  timeprecision 1ps;
-
   import uvm_pkg::*;
 
   logic data_i;
@@ -16,8 +13,8 @@ interface template_if #(OUTPUT_SKEW = 1ps) (
   clocking drv_cb @(posedge clk);
     default input #1step output #OUTPUT_SKEW;
 
-    input  data_i;
-    output data_o;
+    input data_i;
+    inout data_o;
   endclocking : drv_cb
 
   clocking mon_cb @(posedge clk);
@@ -30,8 +27,8 @@ interface template_if #(OUTPUT_SKEW = 1ps) (
   clocking rsp_cb @(posedge clk);
     default input #1step output #OUTPUT_SKEW;
 
-    output data_i;
-    input  data_o;
+    inout data_i;
+    input data_o;
   endclocking : rsp_cb
 
   modport drv_mp(clocking drv_cb, input rst);
@@ -39,3 +36,4 @@ interface template_if #(OUTPUT_SKEW = 1ps) (
   modport rsp_mp(clocking rsp_cb, input rst);
 
 endinterface : template_if
+

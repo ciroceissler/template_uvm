@@ -1,20 +1,25 @@
-class template_driver extends uvm_driver #(template_sqc_item);
+`ifndef TEMPLATE_CHECKER_SVH
+`define TEMPLATE_CHECKER_SVH
 
-  template_agent_config agent_config;
+class template_checker extends uvm_component;
 
-  `uvm_component_utils(template_driver);
+  uvm_tlm_analysis_fifo #(template_sqc_item) template_mon_sqi_afifo;
+
+  `uvm_component_param_utils(template_checker)
 
   // +--------------------------------------------------------------------------
   // | FUNCTION: constructor
   // +--------------------------------------------------------------------------
-  function new(string name = "template_driver", uvm_component parent = null);
+  function new(string name = "template_env", uvm_component parent = null);
     super.new(name, parent);
+
+    this.template_mon_sqi_afifo = new("template_mon_sqi_afifo", this);
   endfunction : new
 
   // +--------------------------------------------------------------------------
   // | FUNCTION: build_phase
   // +--------------------------------------------------------------------------
-  function void build_phase(uvm_phase phase);
+  virtual function build_phase(uvm_phase phase);
     super.build_phase(phase);
   endfunction : build_phase
 
@@ -22,23 +27,16 @@ class template_driver extends uvm_driver #(template_sqc_item);
   // | TASK: run_phase
   // +--------------------------------------------------------------------------
   task run_phase(uvm_phase phase);
-    driver();
+    // TODO(ciroceissler): all
   endtask : run_phase
 
   // +--------------------------------------------------------------------------
-  // | TASK: driver
+  // | FUNCTION: check_phase
   // +--------------------------------------------------------------------------
-  protected task driver();
-    template_sqc_item sqc_item;
+  virtual function check_phase(uvm_phase phase);
+  endfunction : check_phase
 
-    forever begin : TEMPLATE_DRIVER_MAIN_LOOP
-      seq_item_port.get_next_item(sqc_item);
+endclass : template_checker
 
-      // TODO(ciroceissler): map signals
+`endif // TEMPLATE_CHECKER_SVH
 
-      seq_item_port.item_done();
-    end : TEMPLATE_DRIVER_MAIN_LOOP
-
-  endtask : driver
-
-endclass : template_driver

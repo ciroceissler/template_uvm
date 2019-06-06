@@ -1,3 +1,6 @@
+`ifndef TEMPLATE_AGENT_CONFIG_SVH
+`define TEMPLATE_AGENT_CONFIG_SVH
+
 class template_agent_config extends uvm_object;
 
   localparam string config_id = "template_agent_config";
@@ -30,7 +33,11 @@ class template_agent_config extends uvm_object;
     template_agent_config agent_config;
 
     if(!uvm_config_db #(template_agent_config)::get(c, "", config_id, agent_config)) begin
-      `uvm_fatal(get_type_name(), $sformat("can not get() configuration %s from UVM_CONFIG_DB", config_id))
+      string message;
+
+      message = $sformatf("can not get() configuration %s from UVM_CONFIG_DB", config_id);
+
+      `uvm_fatal(get_type_name(), message)
     end
 
     return agent_config;
@@ -51,3 +58,6 @@ class template_agent_config extends uvm_object;
   endfunction : set_vif
 
 endclass : template_agent_config
+
+`endif // TEMPLATE_AGENT_CONFIG_SVH
+

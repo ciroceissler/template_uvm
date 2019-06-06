@@ -1,24 +1,11 @@
-`include "template_agent_pkg.sv"
 `include "template_if.sv"
 
 module template_top_tb;
-
-  timeunit      1ns;
-  timeprecision 1ps;
-
   import uvm_pkg::*;
+  import template_agent_pkg::*;
 
   `include "uvm_macros.svh"
-
-  import template_pkg::*;
-
-  `include "template_env_config.sv"
-  `include "template_env.sv"
-
-  `include "template_report_server.sv"
-  `include "template_test_report.sv"
-  `include "template_test_base.sv"
-  `include "template_test_list.sv"
+  `include "template_test_list.svh"
 
   // +--------------------------------------------------------------------------
   // | VARIABLES:
@@ -27,57 +14,55 @@ module template_top_tb;
   logic rst;
 
   // +--------------------------------------------------------------------------
-  // | VIF:
+  // | INTERFACES INSTATIANTION:
   // +--------------------------------------------------------------------------
-  template_if template_vif (
+  template_if uu_template_if (
     .clk (clk),
     .rst (rst)
   );
 
   // +--------------------------------------------------------------------------
-  // | MODULES:
+  // | MODULES INSTATIANTION:
   // +--------------------------------------------------------------------------
   template uu_template (
     .clk    (clk),
     .rst    (rst),
-    .data_i (template_vif.data_i),
-    .data_o (template_vif.data_o)
+    .data_i (uu_template_if.data_i),
+    .data_o (uu_template_if.data_o)
   );
 
   // +--------------------------------------------------------------------------
-  // | TASK: run_reset
+  // | BLOCK: RUN_RESET
   // +--------------------------------------------------------------------------
-  task run_reset();
-    #10 rst <= 1'b1;
-    #10 rst <= 1'b0;
-  endtask : run_reset
-
-  // +--------------------------------------------------------------------------
-  // | TASK: run_clk
-  // +--------------------------------------------------------------------------
-  task run_clk();
-    forever begin
-      #5 clk <= ~clk;
-    end
-  endtask : run_clk
-
-  // +--------------------------------------------------------------------------
-  // | RUN
-  // +--------------------------------------------------------------------------
-  initial begin
-    clk = 1'b0;
+  initial begin : RUN_RESET
     rst = 1'b0;
 
-    fork
-      run_rst();
-      run_clk();
-    join_none
+    #10 rst = 1'b1;
+    #10 rst = 1'b0;
+  end : RUN_RESET
 
-    uvm_config_db #(virtual template_if)::set(null, "uvm_test_top", "template_vif", template_vif);
+  // +--------------------------------------------------------------------------
+  // | BLOCK: INIT_CLK
+  // +--------------------------------------------------------------------------
+  initial begin : INIT_CLK
+    clk = 1'b0;
+  end : INIT_CLK
+
+  // +--------------------------------------------------------------------------
+  // | BLOCK: RUN_CLK
+  // +--------------------------------------------------------------------------
+  always begin : RUN_CLK
+    #5 clk <= ~clk;
+  end : RUN_CLK
+
+  // +--------------------------------------------------------------------------
+  // | BLOCK: RUN_TEST
+  // +--------------------------------------------------------------------------
+  initial begin : RUN_TEST
+    uvm_config_db #(template_vif_t)::set(null, "uvm_test_top", "template_vif", uu_template_if);
 
     run_test();
+  end : RUN_TEST
 
-    end_of_test = 1;
-  end
+endmodule : template_top_tb
 
-endmodule : template_tob_tb

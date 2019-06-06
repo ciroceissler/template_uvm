@@ -1,3 +1,6 @@
+`ifndef TEMPLATE_REPORT_SERVER_SVH
+`define TEMPLATE_REPORT_SERVER_SVH
+
 class template_report_server extends uvm_report_server;
 
   uvm_report_server        old_report_server;
@@ -35,3 +38,6 @@ class template_report_server extends uvm_report_server;
   endfunction : compose_message
 
 endclass : template_report_server
+
+`endif // TEMPLATE_REPORT_SERVER_SVH
+

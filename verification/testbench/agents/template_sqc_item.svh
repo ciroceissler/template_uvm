@@ -1,3 +1,6 @@
+`ifndef TEMPLATE_SQC_ITEM_SVH
+`define TEMPLATE_SQC_ITEM_SVH
+
 class template_sqc_item extends uvm_sequence_item;
 
   rand bit data;
@@ -17,7 +20,7 @@ class template_sqc_item extends uvm_sequence_item;
   // | FUNCTION: do_print
   // +--------------------------------------------------------------------------
   virtual function void do_print(uvm_printer printer);
-    `uvm_info(get_type_name(), $sformat("-> data = 0x%0b", this.data), UVM_HIGH)
+    `uvm_info(get_type_name(), $sformatf("-> data = 0x%0b", this.data), UVM_HIGH)
   endfunction : do_print
 
   // +--------------------------------------------------------------------------
@@ -39,3 +42,6 @@ class template_sqc_item extends uvm_sequence_item;
   endfunction : do_copy
 
 endclass : template_sqc_item
+
+`endif // TEMPLATE_SQC_ITEM_SVH
+

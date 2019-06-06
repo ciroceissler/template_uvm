@@ -1,8 +1,11 @@
+`ifndef TEMPLATE_SQC_API_SVH
+`define TEMPLATE_SQC_API_SVH
+
 class template_sqc_api extends template_sqc_base;
 
   template_sqc_item template_sqi;
 
-  `uvm_object_utils(template_sqc)
+  `uvm_object_utils(template_sqc_api)
 
   // +--------------------------------------------------------------------------
   // | FUNCTION: constructor
@@ -10,7 +13,7 @@ class template_sqc_api extends template_sqc_base;
   function new(string name = "template_sqc");
     super.new(name);
 
-    this.template_sqi = template_sqi_item::type_id::create("template_sqi");
+    this.template_sqi = template_sqc_item::type_id::create("template_sqi");
   endfunction : new
 
   // +--------------------------------------------------------------------------
@@ -25,9 +28,9 @@ class template_sqc_api extends template_sqc_base;
     t_autostart(tsk, autostart);
 
     if(autostart && dsply) begin
-      `uvm_info(get_type_name(), $sformat("-> task = %s", tsk), UVM_HIGH)
+      `uvm_info(get_type_name(), $sformatf("-> task = %s", tsk), UVM_HIGH)
 
-      template_sqi.print();
+      this.template_sqi.print();
     end
 
   endtask : set_data
@@ -41,7 +44,7 @@ class template_sqc_api extends template_sqc_base;
         this.start(this.get_sequencer());
       end
       else begin
-        `uvm_error(get_type_name(), $sformat("set a sequencer before calling %0s as autostart", tsk))
+        `uvm_error(get_type_name(), $sformatf("set a sequencer before calling %0s as autostart", tsk))
       end
     end
   endtask : t_autostart
@@ -56,3 +59,6 @@ class template_sqc_api extends template_sqc_base;
   endtask : body
 
 endclass : template_sqc_api
+
+`endif // TEMPLATE_SQC_API_SVH
+

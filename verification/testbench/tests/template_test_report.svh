@@ -1,3 +1,6 @@
+`ifndef TEMPLATE_TEST_REPORT_SVH
+`define TEMPLATE_TEST_REPORT_SVH
+
 virtual class template_test_report extends uvm_test;
 
   uvm_table_printer      printer;
@@ -8,6 +11,8 @@ virtual class template_test_report extends uvm_test;
   // +--------------------------------------------------------------------------
   function new(string name = "template_test_report", uvm_component parent=null);
     super.new(name, parent);
+
+    this.report_server = new();
   endfunction : new
 
   // +--------------------------------------------------------------------------
@@ -21,15 +26,15 @@ virtual class template_test_report extends uvm_test;
   // | FUNCTION: end_of_elaboration_phase
   // +--------------------------------------------------------------------------
   virtual function void end_of_elaboration_phase(uvm_phase phase);
-    `uvm_info(get_type_name(), $sformat("printing test topology :\n%s", this.sprint(printer)), UVM_FULL)
+    `uvm_info(get_type_name(), $sformatf("printing test topology :\n%s", this.sprint(printer)), UVM_FULL)
   endfunction : end_of_elaboration_phase
 
   // +--------------------------------------------------------------------------
   // | TASK: report_phase
   // +--------------------------------------------------------------------------
   function void report_phase(uvm_phase phase);
-    if (report_server.get_severity_count(UVM_ERROR)) begin
-      `uvm_error(get_type_name(), "FAIL : simulation completed with errors!", UVM_NONE)
+    if (this.report_server.get_severity_count(UVM_ERROR)) begin
+      `uvm_error(get_type_name(), "FAIL : simulation completed with errors!")
     end
     else begin
       `uvm_info(get_type_name(), "PASS : simulation completed without errors!", UVM_NONE)
@@ -37,3 +42,6 @@ virtual class template_test_report extends uvm_test;
   endfunction : report_phase
 
 endclass : template_test_report
+
+`endif // TEMPLATE_TEST_REPORT_SVH
+

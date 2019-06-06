@@ -6,7 +6,7 @@
   `define assert_and_cover(__name)                         \
     a_``__name : assert property (__name)                  \
       else `uvm_error("assertion ", `fail_to_str(__name) ) \
-    c_``__name : cover property (__name)
+    c_``__name : cover property (__name);
 `endif
 
 module template_abv_checker (
@@ -31,3 +31,4 @@ module template_abv_checker (
   `assert_and_cover(p_bypass)
 
 endmodule : template_abv_checker
+
