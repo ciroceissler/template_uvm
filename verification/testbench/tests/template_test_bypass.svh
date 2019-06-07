@@ -33,7 +33,8 @@ class template_test_bypass extends template_test_base;
   task run_phase(uvm_phase phase);
     phase.raise_objection(this);
 
-    // TODO(ciroceissler): execute test
+    this.sqc.set_data(1'b1);
+    this.sqc.set_data(1'b0);
 
     phase.drop_objection(this);
   endtask : run_phase

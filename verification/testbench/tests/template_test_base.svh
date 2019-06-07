@@ -42,6 +42,15 @@ class template_test_base extends template_test_report;
   endfunction : configure_environment
 
   // +--------------------------------------------------------------------------
+  // | FUNCTION: connect_phase
+  // +--------------------------------------------------------------------------
+  virtual function void connect_phase(uvm_phase phase);
+    super.connect_phase(phase);
+
+    this.sqc.set_sequencer(this.env.template_ag.sequencer);
+  endfunction : connect_phase
+
+  // +--------------------------------------------------------------------------
   // | TASK: run_phase
   // +--------------------------------------------------------------------------
   virtual task run_phase(uvm_phase phase);

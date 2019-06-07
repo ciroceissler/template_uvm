@@ -22,6 +22,11 @@ class template_agent extends uvm_agent;
   // +--------------------------------------------------------------------------
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
+
+    this.driver    = template_driver::type_id::create("template_driver", this);
+    this.monitor   = template_monitor::type_id::create("template_monitor", this);
+    this.sequencer = template_sequencer::type_id::create("template_sequencer", this);
+
   endfunction : build_phase
 
   // +--------------------------------------------------------------------------
@@ -29,6 +34,8 @@ class template_agent extends uvm_agent;
   // +--------------------------------------------------------------------------
   virtual function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);
+
+    this.driver.seq_item_port.connect(this.sequencer.seq_item_export);
   endfunction : connect_phase
 
 endclass : template_agent

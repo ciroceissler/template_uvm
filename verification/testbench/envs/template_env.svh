@@ -56,6 +56,7 @@ class template_env extends uvm_env;
     if (this.env_config.has_fcv) begin
       // TODO(ciroceissler): component connection
     end
+
   endfunction : connect_phase
 
 endclass : template_env

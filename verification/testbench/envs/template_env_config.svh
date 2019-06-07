@@ -19,6 +19,12 @@ class template_env_config extends uvm_object;
   // +--------------------------------------------------------------------------
   function new(string name = "template_env_config");
     super.new(name);
+
+    this.has_chk = 1'b1;
+    this.has_abv = 1'b1;
+    this.has_fcv = 1'b1;
+
+    this.has_agent_template = 1'b1;
   endfunction : new
 
   // +--------------------------------------------------------------------------
